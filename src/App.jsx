@@ -4,6 +4,7 @@ import "./styles.css";
 export const App = () => {
   return (
     <>
+      {/* jsxではclass名を与えるのに、classNameを使う点に注意 */}
       <div className="input-area">
         <input placeholder="TODOを入力" />
         <button>追加</button>
