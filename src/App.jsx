@@ -12,19 +12,23 @@ export const App = () => {
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
         <ul>
-          <li className="list-row">
-            <span>ああああ</span>
-            <button>完了</button>
-            <button>削除</button>
+          <li>
+            <div className="list-row">
+              <p>ああああ</p>
+              <button>完了</button>
+              <button>削除</button>
+            </div>
           </li>
         </ul>
       </div>
       <div className="complete-area">
         <p className="title">完了のTODO</p>
         <ul>
-          <li className="list-row">
-            <span>ああああ</span>
-            <button>戻す</button>
+          <li>
+            <div className="list-row">
+              <p>ああああ</p>
+              <button>戻す</button>
+            </div>
           </li>
         </ul>
       </div>
