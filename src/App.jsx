@@ -43,6 +43,24 @@ export const App = () => {
     setIncompleteTodos(newTodos);
   };
 
+  // 完了ボタンを押した時の処理
+  const onClickComplete = (index) => {
+    // 未完了のTODOリストから、削除する要素を除いた配列を作成する
+    // まずは、newIncompleteTodosにincompleteTodos(現在の未完了のTODOリスト)を代入する
+    const newIncompleteTodos = [...incompleteTodos];
+    // 完了のTODOリストに、値を追加する
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
+    setCompleteTodos(newCompleteTodos);
+
+    // splice関数で、配列から要素を削除する
+    // splice関数の第一引数には、削除する要素のインデックス番号を指定する
+    // splice関数の第二引数には、削除する要素の数を指定する
+    // ここでは、削除する要素のインデックス番号をindexで指定し、削除する要素の数を1で指定している
+    newIncompleteTodos.splice(index, 1);
+    // 未完了のTODOリストを更新する
+    setIncompleteTodos(newIncompleteTodos);
+  };
+
   return (
     <>
       {/* jsxではclass名を与えるのに、classNameを使う点に注意 */}
@@ -65,7 +83,7 @@ export const App = () => {
               <li key={index} >
                 <div className="list-row">
                   <p>{todo}</p>
-                  <button>完了</button>
+                  <button onClick={() => onClickComplete(index)}>完了</button>
                   {/* 下記の記述だと、ページ読み込み時にonClickDeleteが実行されてしまう */}
                   {/* <button onClick={onClickDelete(index)}>削除</button> */}
                   {/* 関数に引数を渡したいときは、そのまま書くとページ読み込み時に実行される */}
