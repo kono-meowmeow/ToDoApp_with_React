@@ -5,6 +5,7 @@ export const IncompleteTodos = (props) => {
 
   return (
     <>
+      {/* jsxではclass名を与えるのに、classNameを使う点に注意 */}
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
         <ul>
