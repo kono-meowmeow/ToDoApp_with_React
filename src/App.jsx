@@ -2,14 +2,39 @@ import React from "react";
 import "./styles.css";
 
 export const App = () => {
+  const [todoText, setTodoText] = React.useState('');
   const [incompleteTodos, setIncompleteTodos] = React.useState(["ああああ", "いいいい"]);
   const [completeTodos, setCompleteTodos] = React.useState(["うううう"]);
+
+  // inputに入力された値を取得する関数
+  // eventは、onChangeで発生したイベント
+  // event.target.valueで、inputに入力された値を取得できる
+  // setTodoTextで、todoTextの値を更新する
+  const onChangeTodoText = (event) => setTodoText(event.target.value);
+
+  // 追加ボタンを押した時の処理
+  const onClickAdd = () => {
+    // inputに入力された値が空の場合、処理を終了する(追加しない)
+    if (todoText === '') return;
+
+    // 未完了のTODOリストに、inputに入力された値を追加する
+    // 追加するための配列を作成
+    // ここでは、incompleteTodosの配列に、inputに入力された値を追加する
+    // ...incompleteTodosで、incompleteTodosの配列の要素を一つずつ取り出して、配列の最後にtodoTextを追加する(配列の結合)
+    const newTodos = [...incompleteTodos, todoText];
+    // 未完了のTODOリストを更新する
+    setIncompleteTodos(newTodos);
+
+    // inputに入力された値を空にする
+    setTodoText('');
+  };
+
   return (
     <>
       {/* jsxではclass名を与えるのに、classNameを使う点に注意 */}
       <div className="input-area">
-        <input placeholder="TODOを入力" />
-        <button>追加</button>
+        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
+        <button onClick={onClickAdd}>追加</button>
       </div>
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
