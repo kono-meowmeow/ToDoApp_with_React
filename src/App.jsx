@@ -52,6 +52,21 @@ export const App = () => {
     deleteFromIncompleteTodos(newIncompleteTodos, index);
   };
 
+  // 戻すボタンを押した時の処理
+  const onClickBack = (index) => {
+    // 完了のTODOリストから、削除する要素を除いた配列を作成する
+    // まずは、newCompleteTodosにcompleteTodos(現在の完了のTODOリスト)を代入する
+    const newCompleteTodos = [...completeTodos];
+
+    // 未完了のTODOリストに、値を追加する
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]];
+    setIncompleteTodos(newIncompleteTodos);
+
+    // 削除実行
+    newCompleteTodos.splice(index, 1);
+    setCompleteTodos(newCompleteTodos);
+  };
+
   // 未完了のTODOリストから、削除する要素を除いた配列を作成する関数
   const deleteFromIncompleteTodos = (incompleteTodos ,index) => {
     // splice関数で、配列から要素を削除する
@@ -101,12 +116,12 @@ export const App = () => {
       <div className="complete-area">
         <p className="title">完了のTODO</p>
         <ul>
-          {completeTodos.map((todo) => {
+          {completeTodos.map((todo, index) => {
             return(
-              <li key={todo}>
+              <li key={index}>
                 <div className="list-row">
                   <p>{todo}</p>
-                  <button>戻す</button>
+                  <button onClick={() => onClickBack(index)}>戻す</button>
                 </div>
               </li>
             );
