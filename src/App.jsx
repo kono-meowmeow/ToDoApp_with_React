@@ -34,13 +34,9 @@ export const App = () => {
     // 未完了のTODOリストから、削除する要素を除いた配列を作成する
     // まずは、newTodosにincompleteTodos(現在の未完了のTODOリスト)を代入する
     const newTodos = [...incompleteTodos];
-    // splice関数で、配列から要素を削除する
-    // splice関数の第一引数には、削除する要素のインデックス番号を指定する
-    // splice関数の第二引数には、削除する要素の数を指定する
-    // ここでは、削除する要素のインデックス番号をindexで指定し、削除する要素の数を1で指定している
-    newTodos.splice(index, 1);
-    // 未完了のTODOリストを更新する
-    setIncompleteTodos(newTodos);
+
+    // 削除実行
+    deleteFromIncompleteTodos(newTodos, index);
   };
 
   // 完了ボタンを押した時の処理
@@ -52,13 +48,19 @@ export const App = () => {
     const newCompleteTodos = [...completeTodos, incompleteTodos[index]];
     setCompleteTodos(newCompleteTodos);
 
+    // 削除実行
+    deleteFromIncompleteTodos(newIncompleteTodos, index);
+  };
+
+  // 未完了のTODOリストから、削除する要素を除いた配列を作成する関数
+  const deleteFromIncompleteTodos = (incompleteTodos ,index) => {
     // splice関数で、配列から要素を削除する
     // splice関数の第一引数には、削除する要素のインデックス番号を指定する
     // splice関数の第二引数には、削除する要素の数を指定する
     // ここでは、削除する要素のインデックス番号をindexで指定し、削除する要素の数を1で指定している
-    newIncompleteTodos.splice(index, 1);
+    incompleteTodos.splice(index, 1);
     // 未完了のTODOリストを更新する
-    setIncompleteTodos(newIncompleteTodos);
+    setIncompleteTodos(incompleteTodos);
   };
 
   return (
