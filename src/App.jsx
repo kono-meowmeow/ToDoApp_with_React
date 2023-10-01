@@ -3,8 +3,8 @@ import "./styles.css";
 
 export const App = () => {
   const [todoText, setTodoText] = React.useState('');
-  const [incompleteTodos, setIncompleteTodos] = React.useState(["ああああ", "いいいい"]);
-  const [completeTodos, setCompleteTodos] = React.useState(["うううう"]);
+  const [incompleteTodos, setIncompleteTodos] = React.useState([]);
+  const [completeTodos, setCompleteTodos] = React.useState([]);
 
   // inputに入力された値を取得する関数
   // eventは、onChangeで発生したイベント
