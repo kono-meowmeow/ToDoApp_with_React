@@ -29,6 +29,20 @@ export const App = () => {
     setTodoText('');
   };
 
+  // 削除ボタンを押した時の処理
+  const onClickDelete = (index) => {
+    // 未完了のTODOリストから、削除する要素を除いた配列を作成する
+    // まずは、newTodosにincompleteTodos(現在の未完了のTODOリスト)を代入する
+    const newTodos = [...incompleteTodos];
+    // splice関数で、配列から要素を削除する
+    // splice関数の第一引数には、削除する要素のインデックス番号を指定する
+    // splice関数の第二引数には、削除する要素の数を指定する
+    // ここでは、削除する要素のインデックス番号をindexで指定し、削除する要素の数を1で指定している
+    newTodos.splice(index, 1);
+    // 未完了のTODOリストを更新する
+    setIncompleteTodos(newTodos);
+  };
+
   return (
     <>
       {/* jsxではclass名を与えるのに、classNameを使う点に注意 */}
@@ -42,17 +56,22 @@ export const App = () => {
           {/* map関数を使って、配列の要素を一つずつ取り出す */}
           {/* この場合、incompleteTodosの要素を一つずつ取り出している */}
           {/* そのため、incompleteTodosの要素の数だけli要素が生成される */}
-          {incompleteTodos.map((todo) => {
+          {incompleteTodos.map((todo, index) => {
             return(
               // map関数の中でreturnを使う場合、keyを設定する必要がある
               // このkeyは、Reactが仮想DOM内で要素を識別するためのもの
               // このkeyは、一意である必要がある
-              // そのため、ここではtodoをkeyとしている
-              <li key={todo} >
+              // そのため、ここではindexをkeyとしている
+              <li key={index} >
                 <div className="list-row">
                   <p>{todo}</p>
                   <button>完了</button>
-                  <button>削除</button>
+                  {/* 下記の記述だと、ページ読み込み時にonClickDeleteが実行されてしまう */}
+                  {/* <button onClick={onClickDelete(index)}>削除</button> */}
+                  {/* 関数に引数を渡したいときは、そのまま書くとページ読み込み時に実行される */}
+                  {/* そのため、(アロー)関数を使って、関数を返すようにする */}
+                  {/* 下記の記述だと、ページ読み込み時にonClickDeleteが実行されない */}
+                  <button onClick={() => onClickDelete(index)}>削除</button>
                 </div>
               </li>
             );
