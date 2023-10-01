@@ -1,10 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import "./styles.css";
 
+import { InputTodo } from "./components/InputTodo";
+
 export const App = () => {
-  const [todoText, setTodoText] = React.useState('');
-  const [incompleteTodos, setIncompleteTodos] = React.useState([]);
-  const [completeTodos, setCompleteTodos] = React.useState([]);
+  const [todoText, setTodoText] = useState('');
+  const [incompleteTodos, setIncompleteTodos] = useState([]);
+  const [completeTodos, setCompleteTodos] = useState([]);
 
   // inputに入力された値を取得する関数
   // eventは、onChangeで発生したイベント
@@ -80,11 +83,12 @@ export const App = () => {
 
   return (
     <>
-      {/* jsxではclass名を与えるのに、classNameを使う点に注意 */}
-      <div className="input-area">
-        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
+      {/* componentにpropsで各関数を渡す */}
+      <InputTodo
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAdd}
+      />
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
         <ul>
