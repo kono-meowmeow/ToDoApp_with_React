@@ -90,7 +90,16 @@ export const App = () => {
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        // 5個以上登録された場合、追加ボタンを押せないようにするために、disabledをtrueを渡す。そうじゃない時には、falseを渡す。
+        disabled={incompleteTodos.length >= 5}
       />
+      {/* 5個以上登録された場合、登録できない旨を表示する */}
+      {/* &&は左辺がtrueの時に、右辺を返す */}
+      {incompleteTodos.length >= 5 && (
+        <p style={{ color: 'red' }}>
+          登録できるToDoは5個までです！タスクを消化してください！
+        </p>
+      )}
       <IncompleteTodos
         todos={incompleteTodos}
         onClickComplete={onClickComplete}
